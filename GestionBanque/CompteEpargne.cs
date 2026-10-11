@@ -7,19 +7,27 @@ namespace GestionBanque
 {
     internal class CompteEpargne : CompteBancaire
     {
-        private double Taux { get; } = 3.5;
-            public CompteEpargne(double soldeCO,string TitulaireCO) :base(soldeCO, TitulaireCO)
+        private double _taux;
+        public double Taux { get { return _taux; } protected set { if (value >= 0 && value <= 10) _taux = value; else _taux = 1.5; } } 
+            public CompteEpargne(double soldeCO,string TitulaireCO,double TauxCO) :base(soldeCO, TitulaireCO)
         {
-
+            Taux = TauxCO;
         }
-            public void Calculer()
+            public void AppliquerInterets()
         {
             Solde += Solde * Taux / 100;
         }
 
         protected override string Description()
         {
-            return $"Numero: {Numero} , Titulaire: {Titulaire} , Sold: {Solde},Taux: {Taux}%";
+            return base.Description() + $", Taux: {Taux}%";
+        }
+        public override bool Retirer(double montant)
+        {
+            if ( montant >10000)
+                return false;
+            
+            return base.Retirer(montant);
         }
     }
 }

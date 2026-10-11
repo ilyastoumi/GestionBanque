@@ -6,10 +6,11 @@ namespace GestionBanque
 {
     internal class CompteCourant : CompteBancaire
     {
-        public double DecouvertAutorise { get; } = 1000;
-        public CompteCourant(double soldeCO, string TitulaireCO ):base(soldeCO, TitulaireCO)
+        private double _decouvertAutorise;
+        public double DecouvertAutorise { get { return _decouvertAutorise; } protected set { if (value < 0) _decouvertAutorise = 0; else _decouvertAutorise = value; } } 
+        public CompteCourant(double soldeCO, string TitulaireCO ,double DecouvertAutoriseCO) :base(soldeCO, TitulaireCO)
         {
-            
+            DecouvertAutorise = DecouvertAutoriseCO;
         }
        
         public override bool Retirer(double montant)
@@ -21,7 +22,7 @@ namespace GestionBanque
         }
         protected override string Description()
         {
-            return $"Numero: {Numero} , Titulaire: {Titulaire} , Sold: {Solde},DecouvertAutorise :{DecouvertAutorise}";
+            return base.Description() +$", DecouvertAutorise :{DecouvertAutorise}";
         }
     }
 }

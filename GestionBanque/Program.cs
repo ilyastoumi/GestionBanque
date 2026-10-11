@@ -65,8 +65,10 @@
             Console.Write("Initial Balance: ");
             double solde = Convert.ToDouble(Console.ReadLine());
 
+            Console.Write("Taux : ");
+            double taux = Convert.ToDouble(Console.ReadLine());
 
-            CompteEpargne ce = new CompteEpargne(solde, nom);
+            CompteEpargne ce = new CompteEpargne(solde, nom , taux);
             liste.Add(ce);
 
             Console.WriteLine("\nSavings account created successfully!");
@@ -85,7 +87,7 @@
             Console.Write("Overdraft Limit (Découvert): ");
             double decouvert = Convert.ToDouble(Console.ReadLine());
 
-            CompteCourant cc = new CompteCourant(solde, nom);
+            CompteCourant cc = new CompteCourant(solde, nom, decouvert);
             liste.Add(cc);
 
             Console.WriteLine("\nCurrent account created successfully!");
@@ -160,7 +162,7 @@
             {
                 if (c is CompteEpargne ce)
                 {
-                    ce.Calculer();
+                    ce.AppliquerInterets();
                     Console.WriteLine($"Interest applied for account {ce.Numero}. New balance: {ce.Solde}");
                     trouve = true;
                 }

@@ -15,7 +15,7 @@ namespace GestionBanque
         //Properties
         public string Numero { get { return _numero; } }//just get
         public string Titulaire { get { return _titulaire; } set { if (string.IsNullOrWhiteSpace(value)) _titulaire = "Inconnu"; else _titulaire = value; } }
-        public double Solde { get { return _solde; } protected set { if (value < 0) _solde = 0; else _solde = value; } }
+        public double Solde { get { return _solde; } protected set { _solde = value; } }
         //Constructeur
         public CompteBancaire(double soldeCO , string TitulaireCO)
             { 
@@ -37,7 +37,8 @@ namespace GestionBanque
         }
         public virtual bool Retirer(double montant)
         {
-            if (montant > Solde) return false;
+            if (montant > Solde || montant <=0) 
+                return false;
             else
                Solde = Solde - montant;
             return true;
