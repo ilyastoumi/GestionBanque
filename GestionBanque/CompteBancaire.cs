@@ -22,7 +22,7 @@ namespace GestionBanque
             _compteur++;
             _numero = "CPT" + _compteur.ToString("D4");
             Titulaire = TitulaireCO;
-            Solde = soldeCO;
+            Solde = soldeCO < 0 ? 0: soldeCO;
     
             
             }

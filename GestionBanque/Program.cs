@@ -56,6 +56,22 @@
 
         // --- Helper Methods ---
 
+        static double LireMontant(string message)
+        {
+            double montant;
+
+            while (true)
+            {
+                Console.Write(message);
+
+                if (double.TryParse(Console.ReadLine(), out montant))
+                    return montant;
+
+                Console.WriteLine("Invalid input! Enter a number.");
+            }
+        }
+
+
         static void CreerCompteEpargne(List<CompteBancaire> liste)
         {
             Console.WriteLine("\n--- Create New Savings Account ---");
@@ -63,10 +79,10 @@
             string nom = Console.ReadLine();
 
             Console.Write("Initial Balance: ");
-            double solde = Convert.ToDouble(Console.ReadLine());
+            double solde = LireMontant("Initial Balance: ");
 
             Console.Write("Taux : ");
-            double taux = Convert.ToDouble(Console.ReadLine());
+            double taux = LireMontant("Taux : ");
 
             CompteEpargne ce = new CompteEpargne(solde, nom , taux);
             liste.Add(ce);
@@ -82,10 +98,10 @@
             string nom = Console.ReadLine();
 
             Console.Write("Initial Balance: ");
-            double solde = Convert.ToDouble(Console.ReadLine());
+            double solde = LireMontant("Initial Balance: ");
 
             Console.Write("Overdraft Limit (Découvert): ");
-            double decouvert = Convert.ToDouble(Console.ReadLine());
+            double decouvert = LireMontant("Overdraft Limit (Découvert): ");
 
             CompteCourant cc = new CompteCourant(solde, nom, decouvert);
             liste.Add(cc);
@@ -119,9 +135,8 @@
                 Console.WriteLine("Account not found or no accounts available!");
                 return;
             }
-
-            Console.Write("Amount to deposit: ");
-            double montant = Convert.ToDouble(Console.ReadLine());
+            // Use the helper method to read a valid amount
+            double montant = LireMontant("Amount to deposit: ");
 
             if (c.Deposer(montant))
                 Console.WriteLine("Deposit successful!");
@@ -141,14 +156,13 @@
                 Console.WriteLine("Account not found or no accounts available!");
                 return;
             }
-
-            Console.Write("Amount to withdraw: ");
-            double montant = Convert.ToDouble(Console.ReadLine());
+            // Use the helper method to read a valid amount
+            double montant = LireMontant("Amount to withdraw: ");
 
             if (c.Retirer(montant))
                 Console.WriteLine("Withdrawal successful!");
             else
-                Console.WriteLine("Transaction failed! Insufficient funds or exceeds overdraft limit.");
+                Console.WriteLine("Transaction failed! Insufficient funds or exceeds overdraft limit 10000 DA.");
 
             c.Afficherinformations();
         }
