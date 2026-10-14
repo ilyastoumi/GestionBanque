@@ -9,7 +9,7 @@ namespace GestionBanque
     {
         //chon
         private string _titulaire;
-        private static int _compteur;
+        private static int _compteur;//static variable to generate unique account numbers
         private string _numero;
         private double _solde;
         //Properties

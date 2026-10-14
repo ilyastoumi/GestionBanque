@@ -7,13 +7,17 @@ namespace GestionBanque
 {
     internal class CompteEpargne : CompteBancaire
     {
+        //chon
         private double _taux;
-        public double Taux { get { return _taux; } protected set { if (value >= 0 && value <= 10) _taux = value; else _taux = 1.5; } } 
-            public CompteEpargne(double soldeCO,string TitulaireCO,double TauxCO) :base(soldeCO, TitulaireCO)
+        //Properties 
+        public double Taux { get { return _taux; } protected set { if (value >= 0 && value <= 10) _taux = value; else _taux = 1.5; } }
+        //Constructeur
+        public CompteEpargne(double soldeCO,string TitulaireCO,double TauxCO) :base(soldeCO, TitulaireCO)
         {
             Taux = TauxCO;
         }
-            public void AppliquerInterets()
+        //Methods
+        public void AppliquerInterets()
         {
             Solde += Solde * Taux / 100;
         }
